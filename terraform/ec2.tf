@@ -1,4 +1,5 @@
 resource "aws_instance" "web_host" {
+  
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t2.nano"
@@ -33,6 +34,7 @@ resource "aws_ebs_volume" "web_host_storage" {
 }
 
 resource "aws_ebs_snapshot" "example_snapshot" {
+  
   # ebs snapshot without encryption
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   description = "${local.resource_prefix.value}-ebs-snapshot"
@@ -42,12 +44,15 @@ resource "aws_ebs_snapshot" "example_snapshot" {
 }
 
 resource "aws_volume_attachment" "ebs_att" {
+  
   device_name = "/dev/sdh"
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   instance_id = "${aws_instance.web_host.id}"
 }
 
 resource "aws_security_group" "web-node" {
+  
+  
   # security group is open to the world in SSH port
   name        = "${local.resource_prefix.value}-sg"
   description = "${local.resource_prefix.value} Security Group"
@@ -61,6 +66,7 @@ resource "aws_security_group" "web-node" {
     "0.0.0.0/0"]
   }
   ingress {
+    
     from_port = 22
     to_port   = 22
     protocol  = "tcp"
@@ -87,6 +93,7 @@ resource "aws_vpc" "web_vpc" {
 }
 
 resource "aws_subnet" "web_subnet" {
+  
   vpc_id                  = aws_vpc.web_vpc.id
   cidr_block              = "172.16.10.0/24"
   availability_zone       = var.availability_zone
@@ -110,6 +117,7 @@ resource "aws_subnet" "web_subnet2" {
 
 
 resource "aws_internet_gateway" "web_igw" {
+  
   vpc_id = aws_vpc.web_vpc.id
 
   tags = {
@@ -147,6 +155,7 @@ resource "aws_route" "public_internet_gateway" {
 
 
 resource "aws_network_interface" "web-eni" {
+  
   subnet_id   = aws_subnet.web_subnet.id
   private_ips = ["172.16.10.100"]
 
@@ -169,6 +178,7 @@ resource "aws_flow_log" "vpcflowlogs" {
 }
 
 resource "aws_s3_bucket" "flowbucket" {
+  
   bucket = "${local.resource_prefix.value}-flowlogs"
   force_destroy = true
 
@@ -189,6 +199,7 @@ output "vpc_id" {
 }
 
 output "public_subnet" {
+  
   description = "The ID of the Public subnet"
   value       = aws_subnet.web_subnet.id
 }
