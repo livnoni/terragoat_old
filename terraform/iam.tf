@@ -1,4 +1,5 @@
 resource "aws_iam_user" "user" {
+  
   name          = "${local.resource_prefix.value}-user"
   force_destroy = true
 
