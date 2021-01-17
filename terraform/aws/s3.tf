@@ -8,6 +8,7 @@ resource "aws_s3_bucket" "data" {
   force_destroy = true
   tags = {
     Name        = "${local.resource_prefix.value}-data"
+    
     Environment = local.resource_prefix.value
   }
 }
@@ -18,6 +19,7 @@ resource "aws_s3_bucket_object" "data_object" {
   source = "resources/customer-master.xlsx"
   tags = {
     Name        = "${local.resource_prefix.value}-customer-master"
+    
     Environment = local.resource_prefix.value
   }
 }
@@ -31,6 +33,7 @@ resource "aws_s3_bucket" "financials" {
   force_destroy = true
   tags = {
     Name        = "${local.resource_prefix.value}-financials"
+    
     Environment = local.resource_prefix.value
   }
 
@@ -48,6 +51,7 @@ resource "aws_s3_bucket" "operations" {
   tags = {
     Name        = "${local.resource_prefix.value}-operations"
     Environment = local.resource_prefix.value
+    
   }
 
 }
@@ -57,6 +61,7 @@ resource "aws_s3_bucket" "data_science" {
   bucket = "${local.resource_prefix.value}-data-science"
   acl    = "private"
   versioning {
+    
     enabled = true
   }
   logging {
@@ -82,6 +87,7 @@ resource "aws_s3_bucket" "logs" {
   }
   force_destroy = true
   tags = {
+    
     Name        = "${local.resource_prefix.value}-logs"
     Environment = local.resource_prefix.value
   }
