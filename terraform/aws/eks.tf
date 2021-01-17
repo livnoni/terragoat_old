@@ -1,6 +1,7 @@
 locals {
   eks_name = {
     value = "${local.resource_prefix.value}-eks"
+    
   }
 }
 
@@ -52,6 +53,7 @@ resource aws_subnet "eks_subnet1" {
 
 resource aws_subnet "eks_subnet2" {
   vpc_id                  = aws_vpc.eks_vpc.id
+  
   cidr_block              = "10.10.11.0/24"
   availability_zone       = var.availability_zone2
   map_public_ip_on_launch = true
@@ -68,18 +70,22 @@ resource aws_eks_cluster "eks_cluster" {
   vpc_config {
     endpoint_private_access = true
     subnet_ids              = ["${aws_subnet.eks_subnet1.id}", "${aws_subnet.eks_subnet2.id}"]
+    
   }
 
   depends_on = [
     "aws_iam_role_policy_attachment.policy_attachment-AmazonEKSClusterPolicy",
     "aws_iam_role_policy_attachment.policy_attachment-AmazonEKSServicePolicy",
+    
   ]
 }
 
 output "endpoint" {
   value = "${aws_eks_cluster.eks_cluster.endpoint}"
+  
 }
 
 output "kubeconfig-certificate-authority-data" {
   value = "${aws_eks_cluster.eks_cluster.certificate_authority.0.data}"
+  
 }
