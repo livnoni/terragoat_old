@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "data" {
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
+    
   }
 }
 
@@ -20,6 +21,7 @@ resource "aws_s3_bucket_object" "data_object" {
     Name        = "${local.resource_prefix.value}-customer-master"
     Environment = local.resource_prefix.value
   }
+  
 }
 
 resource "aws_s3_bucket" "financials" {
@@ -32,6 +34,7 @@ resource "aws_s3_bucket" "financials" {
   tags = {
     Name        = "${local.resource_prefix.value}-financials"
     Environment = local.resource_prefix.value
+    
   }
 
 }
@@ -48,6 +51,7 @@ resource "aws_s3_bucket" "operations" {
   tags = {
     Name        = "${local.resource_prefix.value}-operations"
     Environment = local.resource_prefix.value
+    
   }
 
 }
@@ -62,6 +66,7 @@ resource "aws_s3_bucket" "data_science" {
   logging {
     target_bucket = "${aws_s3_bucket.logs.id}"
     target_prefix = "log/"
+    
   }
   force_destroy = true
 }
