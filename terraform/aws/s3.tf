@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "data" {
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
-    
+   
   }
 }
 
@@ -34,7 +34,6 @@ resource "aws_s3_bucket" "financials" {
   tags = {
     Name        = "${local.resource_prefix.value}-financials"
     Environment = local.resource_prefix.value
-    
   }
 
 }
@@ -61,6 +60,7 @@ resource "aws_s3_bucket" "data_science" {
   bucket = "${local.resource_prefix.value}-data-science"
   acl    = "private"
   versioning {
+    
     enabled = true
   }
   logging {
