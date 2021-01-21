@@ -11,6 +11,7 @@ resource "aws_s3_bucket" "data" {
     Environment = local.resource_prefix.value
   }
   
+  
 }
 
 resource "aws_s3_bucket_object" "data_object" {
@@ -35,8 +36,6 @@ resource "aws_s3_bucket" "financials" {
     Name        = "${local.resource_prefix.value}-financials"
     Environment = local.resource_prefix.value
   }
-  
-
 }
 
 resource "aws_s3_bucket" "operations" {
@@ -83,9 +82,11 @@ resource "aws_s3_bucket" "logs" {
         sse_algorithm     = "aws:kms"
         kms_master_key_id = "${aws_kms_key.logs_key.arn}"
       }
+      
     }
   }
   force_destroy = true
+  
   
   tags = {
     Name        = "${local.resource_prefix.value}-logs"
