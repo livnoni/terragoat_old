@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "data" {
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
+    
   }
 }
 
@@ -19,6 +20,7 @@ resource "aws_s3_bucket_object" "data_object" {
   tags = {
     Name        = "${local.resource_prefix.value}-customer-master"
     Environment = local.resource_prefix.value
+    
   }
 }
 
@@ -40,6 +42,7 @@ resource "aws_s3_bucket" "operations" {
   # bucket is not encrypted
   # bucket does not have access logs
   bucket = "${local.resource_prefix.value}-operations"
+  
   acl    = "private"
   versioning {
     enabled = true
@@ -77,12 +80,14 @@ resource "aws_s3_bucket" "logs" {
       apply_server_side_encryption_by_default {
         sse_algorithm     = "aws:kms"
         kms_master_key_id = "${aws_kms_key.logs_key.arn}"
+        
       }
     }
   }
   force_destroy = true
   tags = {
     Name        = "${local.resource_prefix.value}-logs"
+    
     Environment = local.resource_prefix.value
   }
 }
