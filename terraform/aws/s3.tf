@@ -1,4 +1,5 @@
 resource "aws_s3_bucket" "data" {
+  
   # bucket is public
   # bucket is not encrypted
   # bucket does not have access logs
@@ -32,6 +33,7 @@ resource "aws_s3_bucket" "financials" {
   tags = {
     Name        = "${local.resource_prefix.value}-financials"
     Environment = local.resource_prefix.value
+    
   }
 
 }
