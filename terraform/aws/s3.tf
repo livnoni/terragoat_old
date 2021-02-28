@@ -11,6 +11,9 @@ resource "aws_s3_bucket" "data" {
     Environment = local.resource_prefix.value
   }
   
+  
+  
+  
 }
 
 resource "aws_s3_bucket_object" "data_object" {
