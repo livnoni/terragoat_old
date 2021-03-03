@@ -14,7 +14,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
-      BC_API_URL: https://www.stage.bridgecrew.cloud/api/v1
+      BC_API_URL: https://hoid4w91dc.execute-api.us-west-2.amazonaws.com/v1/api/v1
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
