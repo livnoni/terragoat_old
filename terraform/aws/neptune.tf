@@ -7,6 +7,7 @@ resource "aws_neptune_cluster" "default" {
   iam_database_authentication_enabled = false
   apply_immediately                   = true
   storage_encrypted                   = false
+  
 }
 
 resource "aws_neptune_cluster_instance" "default" {
