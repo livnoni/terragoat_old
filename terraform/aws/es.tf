@@ -8,6 +8,7 @@ resource "aws_elasticsearch_domain" "monitoring-framework" {
     dedicated_master_enabled = false
     dedicated_master_type    = "m4.large.elasticsearch"
     dedicated_master_count   = 1
+    
   }
 
   ebs_options {
@@ -24,6 +25,7 @@ data aws_iam_policy_document "policy" {
       identifiers = ["*"]
     }
     resources = ["*"]
+    
   }
 }
 
