@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "data" {
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
+    
   }
   
 }
@@ -49,6 +50,7 @@ resource "aws_s3_bucket" "operations" {
   tags = {
     Name        = "${local.resource_prefix.value}-operations"
     Environment = local.resource_prefix.value
+    
   }
 
 }
@@ -76,6 +78,7 @@ resource "aws_s3_bucket" "logs" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
+        
         sse_algorithm     = "aws:kms"
         kms_master_key_id = "${aws_kms_key.logs_key.arn}"
       }
