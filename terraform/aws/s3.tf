@@ -4,6 +4,7 @@ resource "aws_s3_bucket" "data" {
   # bucket does not have access logs
   # bucket does not have versioning
   bucket        = "${local.resource_prefix.value}-data"
+  
   acl           = "public-read"
   force_destroy = true
   tags = {
@@ -63,6 +64,7 @@ resource "aws_s3_bucket" "data_science" {
   logging {
     target_bucket = "${aws_s3_bucket.logs.id}"
     target_prefix = "log/"
+    
   }
   force_destroy = true
 }
@@ -74,6 +76,7 @@ resource "aws_s3_bucket" "logs" {
     enabled = true
   }
   server_side_encryption_configuration {
+    
     rule {
       apply_server_side_encryption_by_default {
         sse_algorithm     = "aws:kms"
@@ -85,5 +88,6 @@ resource "aws_s3_bucket" "logs" {
   tags = {
     Name        = "${local.resource_prefix.value}-logs"
     Environment = local.resource_prefix.value
+    
   }
 }
