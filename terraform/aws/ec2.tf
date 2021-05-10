@@ -6,6 +6,7 @@ resource "aws_instance" "web_host" {
   vpc_security_group_ids = [
   "${aws_security_group.web-node.id}"]
   subnet_id = "${aws_subnet.web_subnet.id}"
+  
   user_data = <<EOF
 #! /bin/bash
 sudo apt-get update
@@ -37,6 +38,7 @@ resource "aws_ebs_snapshot" "example_snapshot" {
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   description = "${local.resource_prefix.value}-ebs-snapshot"
   tags = {
+    
     Name = "${local.resource_prefix.value}-ebs-snapshot"
   }
 }
@@ -71,6 +73,7 @@ resource "aws_security_group" "web-node" {
     from_port = 0
     to_port   = 0
     protocol  = "-1"
+    
     cidr_blocks = [
     "0.0.0.0/0"]
   }
@@ -126,6 +129,7 @@ resource "aws_route_table" "web_rtb" {
 }
 
 resource "aws_route_table_association" "rtbassoc" {
+  
   subnet_id      = aws_subnet.web_subnet.id
   route_table_id = aws_route_table.web_rtb.id
 }
@@ -174,6 +178,7 @@ resource "aws_s3_bucket" "flowbucket" {
 
   tags = {
     Name        = "${local.resource_prefix.value}-flowlogs"
+    
     Environment = local.resource_prefix.value
   }
 }
@@ -195,5 +200,6 @@ output "public_subnet" {
 
 output "public_subnet2" {
   description = "The ID of the Public subnet"
+  
   value       = aws_subnet.web_subnet2.id
 }
