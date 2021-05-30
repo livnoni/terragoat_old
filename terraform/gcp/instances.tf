@@ -1,6 +1,7 @@
 data google_compute_zones "zones" {}
 
 resource google_compute_instance "server" {
+  
   machine_type = "n1-standard-1"
   name         = "terragoat-${var.environment}-machine"
   zone         = data.google_compute_zones.zones.names[0]
