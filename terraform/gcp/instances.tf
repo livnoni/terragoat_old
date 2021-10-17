@@ -1,7 +1,7 @@
 data google_compute_zones "zones" {}
 
 resource google_compute_instance "server" {
-  
+
   machine_type = "n1-standard-1"
   name         = "terragoat-${var.environment}-machine"
   zone         = data.google_compute_zones.zones.names[0]
@@ -22,8 +22,14 @@ resource google_compute_instance "server" {
     enable-oslogin         = false
     serial-port-enable     = true
   }
+  labels = {
+    yor_trace = "acb84671-510b-464b-8e56-1c50aa30ea4c"
+  }
 }
 
 resource google_compute_disk "unencrypted_disk" {
   name = "terragoat-${var.environment}-disk"
+  labels = {
+    yor_trace = "1dd9d5f3-30a8-47aa-87cb-bcbb420ccc2d"
+  }
 }

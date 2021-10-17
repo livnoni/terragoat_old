@@ -24,4 +24,7 @@ resource google_bigquery_dataset "dataset" {
     special_group = "allAuthenticatedUsers"
     role          = "READER"
   }
+  labels = {
+    yor_trace = "d8b70cdf-03db-471e-be32-1d3dbf1ee59d"
+  }
 }

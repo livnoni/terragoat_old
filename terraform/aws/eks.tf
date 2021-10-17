@@ -18,6 +18,9 @@ data aws_iam_policy_document "iam_policy_eks" {
 resource aws_iam_role "iam_for_eks" {
   name               = "${local.resource_prefix.value}-iam-for-eks"
   assume_role_policy = data.aws_iam_policy_document.iam_policy_eks.json
+  tags = {
+    yor_trace = "cdcadc8f-30fd-47d0-b0ee-33347ffe321b"
+  }
 }
 
 resource aws_iam_role_policy_attachment "policy_attachment-AmazonEKSClusterPolicy" {
@@ -35,7 +38,8 @@ resource aws_vpc "eks_vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
-    Name = "${local.resource_prefix.value}-eks-vpc"
+    Name      = "${local.resource_prefix.value}-eks-vpc"
+    yor_trace = "8f2d2161-a257-4468-8fd3-6552c2ad24e0"
   }
 }
 
@@ -45,8 +49,10 @@ resource aws_subnet "eks_subnet1" {
   availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
   tags = {
-    Name                                            = "${local.resource_prefix.value}-eks-subnet"
-    "kubernetes.io/cluster/${local.eks_name.value}" = "shared"
+    Name                                             = "${local.resource_prefix.value}-eks-subnet"
+    "kubernetes.io/cluster/${local.eks_name.value}"  = "shared"
+    "kubernetes.io/cluster/$${local.eks_name.value}" = "shared"
+    yor_trace                                        = "445f3ca3-546a-4b65-89bf-1bda3f64d09d"
   }
 }
 
@@ -56,8 +62,10 @@ resource aws_subnet "eks_subnet2" {
   availability_zone       = var.availability_zone2
   map_public_ip_on_launch = true
   tags = {
-    Name                                            = "${local.resource_prefix.value}-eks-subnet2"
-    "kubernetes.io/cluster/${local.eks_name.value}" = "shared"
+    Name                                             = "${local.resource_prefix.value}-eks-subnet2"
+    "kubernetes.io/cluster/${local.eks_name.value}"  = "shared"
+    "kubernetes.io/cluster/$${local.eks_name.value}" = "shared"
+    yor_trace                                        = "f7a8a449-80f9-4a24-aa2e-c40019c068dc"
   }
 }
 
@@ -74,6 +82,9 @@ resource aws_eks_cluster "eks_cluster" {
     "aws_iam_role_policy_attachment.policy_attachment-AmazonEKSClusterPolicy",
     "aws_iam_role_policy_attachment.policy_attachment-AmazonEKSServicePolicy",
   ]
+  tags = {
+    yor_trace = "9e4ebc29-9184-40f9-a102-b01568ea30e4"
+  }
 }
 
 output "endpoint" {
