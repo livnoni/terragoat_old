@@ -9,6 +9,8 @@ resource "aws_s3_bucket" "data" {
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
+    
+    
   }
   
 }
@@ -49,6 +51,8 @@ resource "aws_s3_bucket" "operations" {
   tags = {
     Name        = "${local.resource_prefix.value}-operations"
     Environment = local.resource_prefix.value
+    
+    
   }
 
 }
@@ -57,6 +61,7 @@ resource "aws_s3_bucket" "data_science" {
   # bucket is not encrypted
   bucket = "${local.resource_prefix.value}-data-science"
   acl    = "private"
+  
   versioning {
     enabled = true
   }
@@ -67,7 +72,7 @@ resource "aws_s3_bucket" "data_science" {
   force_destroy = true
 }
 
-resource "aws_s3_bucket" "logs" {
+resource "aws_s3_bucket2" "logs" {
   bucket = "${local.resource_prefix.value}-logs"
   acl    = "log-delivery-write"
   versioning {
