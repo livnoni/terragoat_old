@@ -11,6 +11,7 @@ resource "aws_instance" "web_host" {
 sudo apt-get update
 sudo apt-get install -y apache2
 sudo systemctl start apache2
+  
 sudo systemctl enable apache2
 export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMAAA
 export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMAAAKEY
@@ -36,6 +37,7 @@ resource "aws_ebs_snapshot" "example_snapshot" {
   # ebs snapshot without encryption
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   description = "${local.resource_prefix.value}-ebs-snapshot"
+  
   tags = {
     Name = "${local.resource_prefix.value}-ebs-snapshot"
   }
@@ -57,6 +59,7 @@ resource "aws_security_group" "web-node" {
     from_port = 80
     to_port   = 80
     protocol  = "tcp"
+    
     cidr_blocks = [
     "0.0.0.0/0"]
   }
@@ -78,7 +81,7 @@ resource "aws_security_group" "web-node" {
 }
 
 resource "aws_vpc" "web_vpc" {
-  cidr_block           = "172.16.0.0/16"
+  cidr_block           = "172.16.0.0/8"
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
@@ -118,6 +121,7 @@ resource "aws_internet_gateway" "web_igw" {
 }
 
 resource "aws_route_table" "web_rtb" {
+  
   vpc_id = aws_vpc.web_vpc.id
 
   tags = {
@@ -159,7 +163,7 @@ resource "aws_network_interface" "web-eni" {
 resource "aws_flow_log" "vpcflowlogs" {
   log_destination      = aws_s3_bucket.flowbucket.arn
   log_destination_type = "s3"
-  traffic_type         = "ALL"
+  traffic_type         = "ALL2"
   vpc_id               = aws_vpc.web_vpc.id
 
   tags = {
