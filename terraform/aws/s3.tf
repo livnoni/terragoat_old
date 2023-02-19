@@ -6,6 +6,7 @@ resource "aws_s3_bucket" "data" {
   bucket        = "${local.resource_prefix.value}-data"
   acl           = "public-read"
   force_destroy = true
+  
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
@@ -33,6 +34,7 @@ resource "aws_s3_bucket" "financials" {
   tags = {
     Name        = "${local.resource_prefix.value}-financials"
     Environment = local.resource_prefix.value
+    
   }
 
 }
@@ -62,6 +64,7 @@ resource "aws_s3_bucket" "data_science" {
   }
   logging {
     target_bucket = "${aws_s3_bucket.logs.id}"
+    
     target_prefix = "log/"
   }
   force_destroy = true
@@ -69,6 +72,7 @@ resource "aws_s3_bucket" "data_science" {
 
 resource "aws_s3_bucket" "logs" {
   bucket = "${local.resource_prefix.value}-logs"
+  
   acl    = "log-delivery-write"
   versioning {
     enabled = true
@@ -78,12 +82,14 @@ resource "aws_s3_bucket" "logs" {
       apply_server_side_encryption_by_default {
         sse_algorithm     = "aws:kms"
         kms_master_key_id = "${aws_kms_key.logs_key.arn}"
+        
       }
     }
   }
   force_destroy = true
   tags = {
     Name        = "${local.resource_prefix.value}-logs"
+    
     Environment = local.resource_prefix.value
   }
 }
