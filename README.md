@@ -1,3 +1,5 @@
+[![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/livnoni/terragoat_yuda/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=livnoni%2Fterragoat_yuda&benchmark=INFRASTRUCTURE+SECURITY)
+
 # TerraGoat - Vulnerable Terraform Infrastructure
 
 
