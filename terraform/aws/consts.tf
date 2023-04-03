@@ -2,6 +2,7 @@
 data "aws_caller_identity" "current" {}
 
 variable "company_name" {
+  
   default = "acme"
 }
 
@@ -31,6 +32,7 @@ variable "availability_zone" {
 }
 
 variable "availability_zone2" {
+  
   type    = string
   default = "us-west-2b"
 }
@@ -39,6 +41,7 @@ variable "availability_zone2" {
 variable ami {
   type    = string
   default = "ami-09a5b0b7edf08843d"
+  
 }
 
 variable "dbname" {
