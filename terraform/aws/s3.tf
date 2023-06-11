@@ -4,6 +4,7 @@ resource "aws_s3_bucket" "data" {
   # bucket does not have access logs
   # bucket does not have versioning
   bucket        = "${local.resource_prefix.value}-data"
+  
   acl           = "public-read"
   force_destroy = true
   tags = {
@@ -19,6 +20,7 @@ resource "aws_s3_bucket_object" "data_object" {
   source = "resources/customer-master.xlsx"
   tags = {
     Name        = "${local.resource_prefix.value}-customer-master"
+    
     Environment = local.resource_prefix.value
   }
 }
@@ -28,6 +30,7 @@ resource "aws_s3_bucket" "financials" {
   # bucket does not have access logs
   # bucket does not have versioning
   bucket        = "${local.resource_prefix.value}-financials"
+  
   acl           = "private"
   force_destroy = true
   tags = {
@@ -48,6 +51,7 @@ resource "aws_s3_bucket" "operations" {
   force_destroy = true
   tags = {
     Name        = "${local.resource_prefix.value}-operations"
+    
     Environment = local.resource_prefix.value
   }
 
@@ -56,6 +60,7 @@ resource "aws_s3_bucket" "operations" {
 resource "aws_s3_bucket" "data_science" {
   # bucket is not encrypted
   bucket = "${local.resource_prefix.value}-data-science"
+  
   acl    = "private"
   versioning {
     enabled = true
