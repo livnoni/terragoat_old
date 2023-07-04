@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "data" {
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
+
   }
   
 }
@@ -20,6 +21,7 @@ resource "aws_s3_bucket_object" "data_object" {
   tags = {
     Name        = "${local.resource_prefix.value}-customer-master"
     Environment = local.resource_prefix.value
+
   }
 }
 
@@ -58,6 +60,7 @@ resource "aws_s3_bucket" "data_science" {
   bucket = "${local.resource_prefix.value}-data-science"
   acl    = "private"
   versioning {
+
     enabled = true
   }
   logging {
@@ -69,6 +72,7 @@ resource "aws_s3_bucket" "data_science" {
 
 resource "aws_s3_bucket" "logs" {
   bucket = "${local.resource_prefix.value}-logs"
+
   acl    = "log-delivery-write"
   versioning {
     enabled = true
