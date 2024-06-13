@@ -1,6 +1,7 @@
 resource "aws_instance" "web_host" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
+  
   instance_type = "t2.nano"
 
   vpc_security_group_ids = [
@@ -10,6 +11,7 @@ resource "aws_instance" "web_host" {
 #! /bin/bash
 sudo apt-get update
 sudo apt-get install -y apache2
+  
 sudo systemctl start apache2
 sudo systemctl enable apache2
 export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMAAA
@@ -102,6 +104,7 @@ resource "aws_subnet" "web_subnet2" {
   cidr_block              = "172.16.11.0/24"
   availability_zone       = var.availability_zone2
   map_public_ip_on_launch = true
+  
 
   tags = {
     Name = "${local.resource_prefix.value}-subnet2"
